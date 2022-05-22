@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="robotcleaner"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:thing="https://openhab.org/schemas/thing-description/v1.0.0"
+	xsi:schemaLocation="https://openhab.org/schemas/thing-description/v1.0.0 https://openhab.org/schemas/thing-description-1.0.0.xsd">
+
+	<!-- Sample Thing Type -->
+	<thing-type id="robotcleaner">
+		<!-- Comment this in for Things which need a Bridge to function.
+			<supported-bridge-type-refs>
+			<bridge-type-ref id="RobotCleanerBridge" />
+			</supported-bridge-type-refs>
+		-->
+
+		<label>RobotCleaner Binding Thing</label>
+		<description>Sample thing for RobotCleaner Binding</description>
+
+		<channels>
+			<channel id="can-clean" typeId="canCleanType"/>
+			<channel id="status" typeId="statusType"/>
+			<channel id="is-charging" typeId="isChargingType"/>
+			<channel id="battery" typeId="batteryType"/>
+			<channel id="error" typeId="errorType"/>
+		</channels>
+
+		<config-description>
+			<parameter name="hostname" type="text" required="true">
+				<context>network-address</context>
+				<label>Hostname</label>
+				<description>Hostname or IP address of the device</description>
+			</parameter>
+			<parameter name="password" type="text" required="true">
+				<context>password</context>
+				<label>Password</label>
+				<description>Password to access the device</description>
+			</parameter>
+			<parameter name="refreshInterval" type="integer" unit="s" min="1">
+				<label>Refresh Interval</label>
+				<description>Interval the device is polled in sec.</description>
+				<default>600</default>
+				<advanced>true</advanced>
+			</parameter>
+		</config-description>
+	</thing-type>
+
+	<channel-type id="canCleanType">
+		<item-type>Switch</item-type>
+		<label>Robot Can Clean</label>
+		<description>Robot can start cleaning</description>
+	</channel-type>
+	<channel-type id="statusType">
+		<item-type>Switch</item-type>
+		<label>Robot Is Cleaning</label>
+		<description>Robot is currently cleaning</description>
+	</channel-type>
+	<channel-type id="isChargingType">
+		<item-type>Switch</item-type>
+		<label>Robot Is Charging</label>
+		<description>Robot is charging battery</description>
+	</channel-type>
+	<channel-type id="batteryType">
+		<item-type>Number</item-type>
+		<label>Robot Battery Level</label>
+		<description>Robot battery charge level in %</description>
+	</channel-type>
+	<channel-type id="errorType">
+		<item-type>String</item-type>
+		<label>Robot Error</label>
+		<description>Robot error description if any</description>
+	</channel-type>
+
+</thing:thing-descriptions>
